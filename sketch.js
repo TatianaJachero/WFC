@@ -56,11 +56,18 @@ function setup() {
   createCanvas(1080, 1080);
   let opcionesI = []
   for (let i = 0; i < azulejos.length; i++) {
+    opcionesI.push(i);
+  }
 
+  for (let i = 0; i < RETICULA * RETICULA; i++) {
+    celdas[i] = {
+      colapsada: false,
+      opciones: opcionesI,
+    }
   }
 
 }
 
 function draw() {
-  circle(mouseX, mouseY, 20);
+
 }
