@@ -1,5 +1,5 @@
 const celdas = [];
-const RETICULA = 8;
+const RETICULA = 12;
 
 let ancho; //alto de celda
 let alto;//anchura de celda
@@ -8,6 +8,7 @@ let alto;//anchura de celda
 const azulejos = [];
 const NA = 11; //numero de azulejos
 
+let opcionesI = [];
 
 const reglas = [
   //reglas de los bordes de cada azulejo
@@ -47,6 +48,48 @@ const reglas = [
     DOWN: 1,
     LEFT: 1,
   },
+  {
+    //tile 5
+    UP: 1,
+    RIGHT: 0,
+    DOWN: 0,
+    LEFT: 1,
+  },
+  {
+    //tile 6
+    UP: 1,
+    RIGHT: 1,
+    DOWN: 0,
+    LEFT: 0,
+  },
+  {
+    //tile 7
+    UP: 0,
+    RIGHT: 1,
+    DOWN: 1,
+    LEFT: 0,
+  },
+  {
+    //tile 8
+    UP: 0,
+    RIGHT: 0,
+    DOWN: 1,
+    LEFT: 1,
+  },
+  {
+    //tile 9
+    UP: 1,
+    RIGHT: 1,
+    DOWN: 1,
+    LEFT: 1,
+  },
+  {
+    //tile 10
+    UP: 0,
+    RIGHT: 0,
+    DOWN: 0,
+    LEFT: 0,
+  },
 ];
 
 function preload() {
@@ -61,7 +104,6 @@ function setup() {
   ancho = width / RETICULA;
   alto = height / RETICULA;
 
-  let opcionesI = [];
   for (let i = 0; i < azulejos.length; i++) {
     opcionesI.push(i);
   }
@@ -77,7 +119,7 @@ function setup() {
 }
 
 function draw() {
-  //background(155);
+  background(0);
   const celdasDisponibles = celdas.filter((celda) => {
     return celda.colapsada == false;
   });
@@ -156,12 +198,21 @@ function draw() {
 
           }
         } else {
-          strokeWeight(6);
-          rect(x * ancho, y * alto, ancho, alto);
+          //strokeWeight(6);
+          //rect(x * ancho, y * alto, ancho, alto);
         }
       }
     }
     //noLoop();
+  } else {
+
+
+    for (let i = 0; i < RETICULA * RETICULA; i++) {
+      celdas[i] = {
+        colapsada: false,
+        opciones: opcionesI,
+      };
+    }
   }
 }
 
