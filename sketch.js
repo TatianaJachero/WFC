@@ -6,7 +6,7 @@ let alto;//anchura de celda
 
 
 const azulejos = [];
-const NA = 5; //numero de azulejos
+const NA = 11; //numero de azulejos
 
 
 const reglas = [
