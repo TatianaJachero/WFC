@@ -121,22 +121,10 @@ function draw() {
           );
           //monitorear UP
           if (y > 0) {
-            const indiceUp = x + (y - 1) * RETICULA;
-            const celdaUp = celdas[indiceUp];
-            if (!celdaUp.colapsada) {
-              const nuevasOpciones = [];
-              for (let i = 0; i < celdaUp.opciones.length; i++) {
-
-                if (reglasActuales['UP'] == reglas[celdaUp.opciones[i]]['DOWN']) {
-
-                  const celdaCompatible = celdaUp.opciones[i];
-                  nuevasOpciones.push(celdaCompatible)
-
-                }
-
-              }
-              celdaUp.opciones = nuevasOpciones;
-              print(nuevasOpciones);
+            const indiceUP = x + (y - 1) * RETICULA;
+            const celdaUP = celdas[indiceUP];
+            if (!celdaUP.colapsada) {
+              cambiarEntropia(celdaUP, reglasActuales['UP'], 'DOWN');
             }
 
           }
@@ -145,7 +133,7 @@ function draw() {
             const indiceRIGHT = (x + 1) + y * RETICULA;
             const celdaRIGHT = celdas[indiceRIGHT];
             if (!celdaRIGHT.colapsada) {
-
+              cambiarEntropia(celdaRIGHT, reglasActuales['RIGHT'], 'LEFT');
             }
 
           }
@@ -154,7 +142,7 @@ function draw() {
             const indiceDOWN = x + (y + 1) * RETICULA;
             const celdaDOWN = celdas[indiceDOWN];
             if (!celdaDOWN.colapsada) {
-
+              cambiarEntropia(celdaDOWN, reglasActuales['DOWN'], 'UP');
             }
 
           }
@@ -163,7 +151,7 @@ function draw() {
             const indiceLEFT = (x - 1) + y * RETICULA;
             const celdaLEFT = celdas[indiceLEFT];
             if (!celdaLEFT.colapsada) {
-
+              cambiarEntropia(celdaLEFT, reglasActuales['LEFT'], 'RIGHT');
             }
 
           }
@@ -173,6 +161,22 @@ function draw() {
         }
       }
     }
-    noLoop();
+    //noLoop();
   }
+}
+
+
+function cambiarEntropia(_celda, _regla, _opuesta) {
+  const nuevasOpciones = [];
+  for (let i = 0; i < _celda.opciones.length; i++) {
+
+    if (_regla == reglas[_celda.opciones[i]][_opuesta]) {
+
+      const celdaCompatible = _celda.opciones[i];
+      nuevasOpciones.push(celdaCompatible)
+
+    }
+  }
+  _celda.opciones = nuevasOpciones;
+  print(nuevasOpciones);
 }
